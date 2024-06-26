@@ -2,7 +2,7 @@ const taskModel = require("../../models/task");
 const pager = require("../../utils/pager");
 
 async function findOneById(_id){
-  return await taskModel.findById(_id).exec()
+  return await taskModel.findById(_id).populate('user').exec()
 }
 
 async function save(user){
