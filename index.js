@@ -8,7 +8,7 @@ const swaggerDocument = require('./swagger-output.json');
 //const swaggerDocument = require('./swagger-output.json');
 
 //Routers
-const taskRouter = require("./src/modules/task/task.routes");
+const taskRouter = require("./src/modules/proyecto/proyecto.routes");
 const usuarioRouter = require("./src/modules/user/user.routes");
 
 // Secure setup
@@ -56,5 +56,5 @@ var options = {
 };
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument,options))
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App listening on port ${port}`)
 })
