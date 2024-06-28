@@ -11,12 +11,10 @@
     "http"
   ],
   "paths": {
-    "/api/task": {
+    "/api/proyecto": {
       "get": {
-        "tags": [
-          "Task"
-        ],
-        "description": "",
+        "description": "Busca todos los proyectos.",
+        "tags": ["Proyecto"],
         "parameters": [
           {
             "name": "params",
@@ -26,7 +24,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Se muestra los proyectos."
           },
           "500": {
             "description": "Internal Server Error"
@@ -34,13 +32,41 @@
         }
       },
       "post": {
-        "tags": [
-          "Task"
+        "description": "Crea un nuevo proyecto",
+        "tags": ["Proyecto"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "titulo": {
+                  "type": "string",
+                  "example": "Nombre del proyecto"
+                },
+                "descripcion": {
+                  "type": "string",
+                  "example": "Descripción del proyecto"
+                },
+                "fecha": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2024-06-27"
+                },
+                "responsable": {
+                  "type": "string",
+                  "example": "60d6e9b58a7b3a0015b35b5a"
+                }
+              },
+              "required": ["titulo", "descripcion", "fecha", "responsable"]
+            }
+          }
         ],
-        "description": "",
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "Se muestra el proyecto Creado"
           },
           "500": {
             "description": "Internal Server Error"
@@ -48,12 +74,10 @@
         }
       }
     },
-    "/api/task/{id}": {
+    "/api/proyecto/{id}": {
       "get": {
-        "tags": [
-          "Task"
-        ],
-        "description": "",
+        "description": "Se busca un proyecto por su ID.",
+        "tags": ["Proyecto"],
         "parameters": [
           {
             "name": "id",
@@ -64,7 +88,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Se envia el proyecto, sino existe no muestra nada."
           },
           "500": {
             "description": "Internal Server Error"
@@ -72,21 +96,46 @@
         }
       },
       "put": {
-        "tags": [
-          "Task"
-        ],
-        "description": "",
+        "description": "Actualiza un proyecto por ID",
+        "tags": ["Proyecto"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "titulo": {
+                  "type": "string",
+                  "example": "Nuevo nombre del proyecto"
+                },
+                "descripcion": {
+                  "type": "string",
+                  "example": "Nueva descripción del proyecto"
+                },
+                "fecha": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2024-06-27"
+                },
+                "responsable": {
+                  "type": "string",
+                  "example": "60d6e9b58a7b3a0015b35b5a"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Se muestra el proyecto con sus actualizaciones."
           },
           "500": {
             "description": "Internal Server Error"
@@ -94,10 +143,8 @@
         }
       },
       "delete": {
-        "tags": [
-          "Task"
-        ],
-        "description": "",
+        "description": "Se elimina un proyecto por ID.",
+        "tags": ["Proyecto"],
         "parameters": [
           {
             "name": "id",
@@ -108,7 +155,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Se muestra un mensaje: 'Proyecto eliminado correctamente.'"
           },
           "500": {
             "description": "Internal Server Error"
@@ -121,7 +168,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Se muestra los Usuarios.",
         "parameters": [
           {
             "name": "params",
@@ -131,7 +178,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Se muestran los usuarios con el paginado identado."
           },
           "500": {
             "description": "Internal Server Error"
@@ -139,13 +186,56 @@
         }
       },
       "post": {
-        "tags": [
-          "Usuario"
+        "description": "Crea un nuevo usuario",
+        "tags": ["Usuario"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstname": {
+                  "type": "string",
+                  "example": "Agustin"
+                },
+                "lastname": {
+                  "type": "string",
+                  "example": "Perez"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "agustin.perez@gmail.com"
+                },
+                "domicilio": {
+                  "type": "string",
+                  "example": "123 Calle"
+                },
+                "celular": {
+                  "type": "string",
+                  "example": "+544567890"
+                },
+                "documento": {
+                  "type": "string",
+                  "example": "123456789"
+                },
+                "rol": {
+                  "type": "string",
+                  "example": "Admin"
+                },
+                "area": {
+                  "type": "string",
+                  "example": "Desarrollo"
+                }
+              },
+              "required": ["firstname", "lastname", "email", "rol"]
+            }
+          }
         ],
-        "description": "",
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Se muestra el usuario creado."
           },
           "500": {
             "description": "Internal Server Error"
@@ -158,7 +248,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Se busca un Usuario por su ID.",
         "parameters": [
           {
             "name": "id",
@@ -169,7 +259,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Se muestra el usuario, sino existe no muestra nada."
           },
           "500": {
             "description": "Internal Server Error"
@@ -180,18 +270,60 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Actualiza un usuario por ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstname": {
+                  "type": "string",
+                  "example": "Nuevo nombre"
+                },
+                "lastname": {
+                  "type": "string",
+                  "example": "Nuevo apellido"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "nuevo.email@gmail.com"
+                },
+                "domicilio": {
+                  "type": "string",
+                  "example": "456 Ejemplo"
+                },
+                "celular": {
+                  "type": "string",
+                  "example": "+9876543210"
+                },
+                "documento": {
+                  "type": "string",
+                  "example": "987654321"
+                },
+                "rol": {
+                  "type": "string",
+                  "example": "Usuario"
+                },
+                "area": {
+                  "type": "string",
+                  "example": "Soporte"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Se muestra el usuario con sus actualizaciones."
           },
           "500": {
             "description": "Internal Server Error"
@@ -202,7 +334,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Se elimina un usuario por ID.",
         "parameters": [
           {
             "name": "id",
@@ -213,7 +345,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Se muestra un mensaje: 'Usuario eliminado correctamente.'"
           },
           "500": {
             "description": "Internal Server Error"
